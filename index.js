@@ -25,7 +25,7 @@ const client = new MongoClient(uri, {
 async function run() {
   try {
     // Connect the client to the server	(optional starting in v4.7)
-    await client.connect();
+    // await client.connect();
 
     const usersCollection = client.db("skidsDb").collection("users");
 
@@ -50,7 +50,6 @@ async function run() {
     app.patch('/user/:id', async (req, res) => {
       const id = req.params.id;
       const updatedUser = req.body;
-      console.log(id, updatedUser)
       const filter = { _id: new ObjectId(id) };
       const updateUser = {
         $set: {
@@ -79,7 +78,7 @@ run().catch(console.dir);
 
 
 app.get('/', (req, res) => {
-    res.send('skids server is sunning')
+    res.send('skids server is running')
 })
 
 app.listen(port, () => {
