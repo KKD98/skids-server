@@ -47,6 +47,22 @@ async function run() {
       res.send(result);
     })
 
+    app.patch('/user/:id', async (req, res) => {
+      const id = req.params.id;
+      const updatedUser = req.body;
+      console.log(id, updatedUser)
+      const filter = { _id: new ObjectId(id) };
+      const updateUser = {
+        $set: {
+          name: updatedUser.name,
+          email: updatedUser.email,
+          phone: updatedUser.phone
+        },
+      };
+
+      const result = await usersCollection.updateOne(filter, updateUser);
+      res.send(result);
+    });
 
 
 
